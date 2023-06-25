@@ -168,9 +168,6 @@ def main():
     root = tk.Tk()
     root.geometry("600x300")
 
-    # Make the window not resizable
-    root.resizable(False, False)
-
     # Add title to the window
     root.title("VR Project - Select a Monitor")
 
@@ -184,7 +181,9 @@ def main():
         # Convert screenshot to PIL Image
         img = Image.fromarray(np.array(screenshot))
         # Resize the image to fit into the GUI
-        img = img.resize((100, 100), Image.ANTIALIAS)
+        img = img.resize((150, 100), Image.ANTIALIAS)
+        
+
         # Convert PIL Image to PhotoImage
         photo = ImageTk.PhotoImage(img)
 
@@ -193,7 +192,8 @@ def main():
 
         monitor_label = tk.Label(monitor_frame, image=photo)
         monitor_label.image = photo  # Keep a reference to prevent garbage collection
-        monitor_label.pack(side="left")
+        monitor_label.pack(side="left", padx=10, pady=10)
+
 
         tk.Radiobutton(
             monitor_frame, text=f"Monitor {i}", variable=monitor_var, value=i
@@ -201,7 +201,9 @@ def main():
 
     # Create and pack a start button
     start_button = tk.Button(root, text="Start Screencast", command=start_screencast_from_gui)
+    
     start_button.pack()
+
 
     # Run the tkinter main loop
     root.mainloop()
